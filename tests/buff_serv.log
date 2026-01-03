@@ -1,0 +1,39 @@
+==120950== Memcheck, a memory error detector
+==120950== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==120950== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==120950== Command: ./build/webserv
+==120950== 
+
+
+	DEBUG MODE
+
+
+	webserv: Warning: No config file passed as arg: Default configuration will be used
+==120958== Memcheck, a memory error detector
+==120958== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==120958== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==120958== Command: ./script_infinite_loop.cgi
+==120958== 
+	webserv: [1;91mError: [0mTimeout 
+			: FILE: /home/romolog/Documents/CPP/Webserver/V_5_portfolio/cxx_src/exec_AppRun_18_kill_timeout.cpp
+			: LINE: 45
+==120950== 
+==120950== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==120950== Open file descriptor 2: /home/romolog/Documents/CPP/Webserver/V_5_portfolio/tests/buff_serv.log
+==120950==    <inherited from parent>
+==120950== 
+==120950== Open file descriptor 1: /dev/null
+==120950==    <inherited from parent>
+==120950== 
+==120950== Open file descriptor 0: /dev/null
+==120950==    <inherited from parent>
+==120950== 
+==120950== 
+==120950== HEAP SUMMARY:
+==120950==     in use at exit: 0 bytes in 0 blocks
+==120950==   total heap usage: 389 allocs, 389 frees, 180,662 bytes allocated
+==120950== 
+==120950== All heap blocks were freed -- no leaks are possible
+==120950== 
+==120950== For lists of detected and suppressed errors, rerun with: -s
+==120950== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

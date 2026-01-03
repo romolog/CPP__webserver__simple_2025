@@ -1,0 +1,110 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_AppRun_31_prepare_post.cpp                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rponomar <rponomar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/24 20:26:46 by rponomar          #+#    #+#             */
+/*   Updated: 2025/09/21 18:21:44 by rponomar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "exec_AppRun.hpp"
+
+#include "all_AppException.hpp"
+#include "all_utils.hpp"
+
+#include <dirent.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
+
+
+void	AppRun::prepare_put(Handler *handler_ptr)
+{
+
+	HTTP_Request& request = handler_ptr->http_request_;
+	HTTP_Response& response = handler_ptr->http_response_;	
+	ServerConfig& serv_config = handler_ptr->config_server_;
+	Location& location = handler_ptr->config_location_;
+
+	std::string root_server = serv_config.root_;
+	std::string root_location = location.root_;
+	std::string target = (root_location.empty() ? root_server : root_location) + request.uri_path_;
+
+	// if target = Dir set ERROR_RESPONSE
+	size_t target_len = target.size();
+	if (target[target_len - 1] == '/')
+	{
+
+		set_error_response(handler_ptr, "POST: Invalid target: Dir" + ft_code_location(__FILE__, __LINE__), 400);
+		prepare_error(handler_ptr);
+		return ;
+	}
+
+	//	check if target does exist and switch accordingly
+	int is_exist = !access(target.c_str(), F_OK);
+	int no_access = is_exist && access(target.c_str(), W_OK);
+	int	is_body = !request.body_.empty();
+	int is_dir;
+	int	is_regular_file;
+	long long file_size;
+	
+	int is_uploade_allowed = location.upload_allowed_;
+	
+	if (is_exist && \
+		ft_get_file_info(is_dir, is_regular_file, file_size, target) && \
+		no_access)
+	{
+		set_error_response(handler_ptr, "POST: Invalid target file: Permission denied" + \
+										ft_code_location(__FILE__, __LINE__), 403);
+		prepare_error(handler_ptr);
+		return ;
+	}
+
+	if (!is_exist && is_body && is_uploade_allowed) // target doesn't exist and upload is allowed
+	{
+		std::ofstream ofs(target.c_str());
+		if (!ofs.is_open())
+		{
+			set_error_response(handler_ptr, "POST: Invalid target: Dir" + \
+								ft_code_location(__FILE__, __LINE__), 500);
+			prepare_error(handler_ptr);
+			return ;
+		}
+
+		ofs << request.body_;
+		ofs.close();
+	}
+	else if (!is_exist)  // target doesn't exist and upload is impossible (not allowed or body is empty)
+	{
+		set_error_response(handler_ptr, "POST: Invalid target: Doesn't exist and upload is not allowed" \
+							+ ft_code_location(__FILE__, __LINE__), 403);
+		prepare_error(handler_ptr);
+		return ;
+	}
+	else // target exists
+	{
+		std::ofstream ofs(target.c_str(), std::ios::trunc);
+		if (!ofs.is_open())
+		{
+
+			set_error_response(handler_ptr, "POST: Invalid target: Dir" \
+											+ ft_code_location(__FILE__, __LINE__), 500);
+			prepare_error(handler_ptr);
+			return ;
+		}
+
+		ofs << request.body_ << std::flush;
+		ofs.close();
+	}
+
+	std::string status_line = "HTTP/1." + ft_itoa(request.http_version_) + " 200 OK\r\n";
+	std::string content_type = "";
+	response.full_body_ = "";
+
+	assemble_chunk_or_unchunk(handler_ptr, response, status_line, content_type);
+	handler_ptr->handler_status_ = READY_TO_RESPONSE_;
+}
+

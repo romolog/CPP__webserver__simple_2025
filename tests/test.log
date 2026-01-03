@@ -1,0 +1,45 @@
+Sat Jan 3 06:06:22 PM EST 2026
+--------------------------------
+
+
+TEST # 1 
+	Two valid configuration files are passed:
+		prog output:
+			webserv: Error: More than 1 arg passed
+		prog exit code: 1
+
+TEST # 2 
+	Invalid configuration file is passed:
+		prog output:
+			webserv: Error: Conf file has only comments or is blank: ./tests/confs_invalid/space.conf
+		prog exit code: 1
+
+TEST # 3 
+	Invalid configuration file is passed:
+		prog output:
+			webserv: Error: Conf file is empty: ./tests/confs_invalid/empty.conf
+		prog exit code: 1
+
+TEST # 4 
+	Invalid configuration file is passed:
+		prog output:
+			webserv: Error: Conf file lacks info: ./tests/confs_invalid/incomplete_1.conf
+		prog exit code: 1
+
+TEST # 5 
+	Invalid configuration file is passed:
+		prog output:
+			webserv: Error: Conf file has only comments or is blank: ./tests/confs_invalid/comments_only.conf
+		prog exit code: 1
+
+TEST # 6 
+	Invalid configuration file is passed:
+		prog output:
+			webserv: Error: Conf file has only comments or is blank: ./tests/confs_invalid/blank.conf
+		prog exit code: 1
+
+TEST # 7 
+	Invalid configuration file is passed:
+		prog output:
+			webserv: Error: Conf file is invalid: Host-port is duplicated for port: 8080
+		prog exit code: 1

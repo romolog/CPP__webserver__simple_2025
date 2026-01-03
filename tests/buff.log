@@ -1,0 +1,6 @@
+HTTP/1.1 408 Request Timeout
+CONTENT-TYPE: text/html
+CONTENT-LENGTH: 22
+
+>>| 408: TIMEOUT |<<
+

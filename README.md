@@ -48,7 +48,6 @@ git clone https://github.com/romolog/C__graphics__3D_maze_2025 webserv;
 cd webserv;
 cmake -B build && cmake --build build;
 ```
----
 
 ### Build in debug mode and Run with automated tests
 ```bash

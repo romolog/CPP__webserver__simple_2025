@@ -9,12 +9,13 @@ Here are some features of my project:
 * Scalable:			Transparent and scalable architecture
 * CMake:			CMake-based build system
 * Bash:				Bash script with automated tests and clear result reporting
-* Parsing:			Parsing of the input configuration file with proper handling of comments, 
-					token → lexeme → configuration chains, and detection of syntax and lexical errors
+* Parsing:			Parsing of the input configuration file with proper handling of 
+					comments, token → lexeme → configuration chains, 
+					and detection of syntax and lexical errors
 * Configuration:	The configuration file supports multiple servers with different ports 
 					or hostnames, a default index page or directory autoindex, 
 					and routing request to target directory. 
-* I/O multiplex:	Network programming implementing input and output multiplex based on epoll API
+* I/O multiplex:	Network programming implementing input&nbsp;/&nbsp;output multiplex based on epoll API
 * Sockets:			Sockets status control for removing clients on errors or connection drops
 * Methods:			Implementation of the GET, POST, and DELETE methods
 * CGI:				CGI request handling

@@ -15,16 +15,17 @@ Implemented features:
 * Configuration:	The configuration file supports multiple servers with different ports 
 					or hostnames, a default index page or directory autoindex, 
 					and routing request to target directory. 
-* I/O multiplex:	Network programming implementing input&nbsp;/&nbsp;output multiplex based on epoll API
-* Sockets:			Sockets status control for removing clients on errors or connection drops
+* I/O multiplex:	Input&nbsp;/&nbsp;output multiplexing implemented using the epoll API
+* Sockets:			Sockets state management for removing clients on errors 
+					or connection drops
 * Methods:			Implementation of the GET, POST, and DELETE methods
-* CGI:				CGI request handling
-* Chunks:			Chunked transfer encoding for requests and responses is supported
+* CGI:				CGI request handling using multi-process programming
+* Chunks:			Support for chunked transfer encoding in requests and responses
 * Timeout:			Timeout-based process termination to prevent overloading, 
 					abandoned requests, and CGI malfunctions such as infinite loops
 * Siege:			Successfully tested with Siege, achieving 100% availability
 * Memory control:	No memory leaks, verified with Valgrind
-* FDs congrol:		No file descriptors left open, verified with Valgrind
+* FDs control:		No file descriptors left open, verified with Valgrind
 * Kernel signals:	Kernel signals handling with proper interception and clean shutdown
 </pre>
 

@@ -3,7 +3,7 @@
 This is my network programming project written in **C++** for **Linux (Ubuntu)**.  
 It serves a few static websites and allows **GET, POST, DELETE** methods and **CGI** requests.
 
-Here are some features of my project:
+Implemented features:
 <pre>
 * RFC:				Compliance with relevant RFC standards
 * Scalable:			Transparent and scalable architecture
@@ -19,7 +19,7 @@ Here are some features of my project:
 * Sockets:			Sockets status control for removing clients on errors or connection drops
 * Methods:			Implementation of the GET, POST, and DELETE methods
 * CGI:				CGI request handling
-* Chunks:			Chunked transfer encoding requests and responses is supported
+* Chunks:			Chunked transfer encoding for requests and responses is supported
 * Timeout:			Timeout-based process termination to prevent overloading, 
 					abandoned requests, and CGI malfunctions such as infinite loops
 * Siege:			Successfully tested with Siege, achieving 100% availability

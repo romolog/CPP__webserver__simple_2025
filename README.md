@@ -3,19 +3,22 @@
 This is my network programming project written in **C++** for **Linux (Ubuntu)**.  
 It serves a few static websites and allows **GET, POST, DELETE** methods and **CGI** requests.
 
-Here are some features of my projects:
-- following **RFC** standards;
-- transparent and scalable architechture; 
-- **CMAKE** build;
-- bash script with automated tests and convenient results indication; 
-- parsing input configuration file and properly handling: comments, chain of token->lexem->configurations, monitoring syntax and lexic errors;
-- GET, POST, DELETE method implemented;
-- CGI requests implemented;
-- TIMEOUT kill implemented to prevent overloading, abandoning requests and CGI malfanction like infinite loop;
-- **SIEGE** passed with 100% availability;
-- no memory leaks controlled by Valgrind;
-- no FDs are left open controlled by Valgrind;
-- **KERNEL SIGNAL** handling: interception and clean exit.
+Here are some features of my project:
+<pre>
+* RFC:		Compliance with relevant RFC standards
+* Scalable:	Transparent and scalable architecture
+* CMake:	CMake-based build system
+* Bash:		Bash scripts with automated tests and clear result reporting
+* Parsing:	Parsing of the input configuration file with proper handling of comments, token → lexeme → configuration chains, and detection of syntax and lexical errors
+* Methods:	Implementation of the GET, POST, and DELETE methods
+* CGI:		CGI request handling
+* Timeout:	Timeout-based process termination to prevent overloading, abandoned requests, and CGI malfunctions such as infinite loops
+* Siege:	Successfully tested with Siege, achieving 100% availability
+* Memory:	No memory leaks, verified with Valgrind
+* FDs:		No file descriptors left open, verified with Valgrind
+* Signals:	Kernel signals handling with proper interception and clean shutdown
+</pre>
+
 
 ---
 

@@ -143,7 +143,7 @@ echo -e "\n\t$WHT_BOLD_$BG_GRY_ TEST SERVER RUN: $DFT_\n";
 #	test one line configuration file
 
 CALL_="$PROG_ ./tests/confs_valid/one_line.conf";
-TEST_DESCR_="VISUAL CHECK: click a link below and check one line configuration file supports a website (duration: 20 sec)";
+TEST_DESCR_="VISUAL CHECK: click the link below and check 'one line' configuration file supports a website (duration: 20 sec)";
 
 NUM_=$(($NUM_ + 1));
 TEST_="$DFT_$NUM_:$DFT_ $TEST_DESCR_\n\t$MAG_$CALL_$DFT_\n\n\thttp://127.0.0.1:2442$DFT_\n";
@@ -160,7 +160,7 @@ kill $PID_;
 #	test multiple websites visually in browser
 
 CALL_="$PROG_";
-TEST_DESCR_="VISUAL CHECK: click links below and check if 2 websites are available (duration: 30 sec)";
+TEST_DESCR_="VISUAL CHECK: click the links below and check if the two websites are available (duration: 30 sec)";
 
 NUM_=$(($NUM_ + 1));
 TEST_="$DFT_$NUM_:$DFT_ $TEST_DESCR_\n\t$MAG_$CALL_$DFT_\n\n\thttp://127.0.0.1:4242\n\thttp://127.0.0.1:4343$DFT_\n";
@@ -578,6 +578,32 @@ chmod 744 ./tests/delete/permission_denied/;
 
 TARGET_="/cgi/permission_denied_script_capitalize.cgi";
 chmod 744 ./tests$TARGET_;
+
+### SIEGE ######################################################################
+# test with siege for 3 minutes
+
+NUM_=$(($NUM_ + 1));
+SIEGE_="siege -b -t 2m  http://127.0.0.1:2442";
+TEST_="$DFT_$NUM_:$DFT_ SIEGE during 2 minutes. Please wait... \n\t$MAG_$SIEGE_$DFT_";
+echo -e $TEST_;
+
+2>/dev/null 1>/dev/null $PROG_ & echo $! > ./tests/webserv.pid;
+PID_=$(cat ./tests/webserv.pid);
+sleep 3;
+
+{ $SIEGE_; } >& $BUFF_;
+
+AVAILABILITY_=$(cat <$BUFF_ | grep -i 'availability' 2>/dev/null);
+
+echo -en $YEL_ "\tAvailability:\t"$DFT_;
+if [[ $AVAILABILITY_ == *"100.00"* ]] ; then
+	echo -e $GRN_ "OK\t100.00%" $DFT_
+else
+	echo -e $YEL_ "CHECK\t"$AVAILABILITY_$DFT_
+fi
+
+kill $PID_;
+sleep 3;
 
 ### END ######################################################################
 

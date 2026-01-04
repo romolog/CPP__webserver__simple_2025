@@ -35,7 +35,7 @@ Implemented features:
 ### System Requirements
 
 - Linux (Ubuntu)
-- gcc
+- g++
 - cmake
 - bash
 - valgrind

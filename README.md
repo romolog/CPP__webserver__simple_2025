@@ -19,7 +19,7 @@ Here are some features of my project:
 * Sockets:			Sockets status control for removing clients on errors or connection drops
 * Methods:			Implementation of the GET, POST, and DELETE methods
 * CGI:				CGI request handling
-* Chunks:			Chunked requests and responses are supported
+* Chunks:			Chunked transfer encoding requests and responses is supported
 * Timeout:			Timeout-based process termination to prevent overloading, 
 					abandoned requests, and CGI malfunctions such as infinite loops
 * Siege:			Successfully tested with Siege, achieving 100% availability
@@ -46,10 +46,21 @@ Here are some features of my project:
 ```bash
 git clone https://github.com/romolog/C__graphics__3D_maze_2025 webserv;
 cd webserv;
+cmake -B build && cmake --build build;
 ```
 ---
 
-### Run 
+### Build in debug mode and Run with automated tests
 ```bash
 ./run_webserv.sh -DNDEBUG=OFF;
+```
+
+### Run with the default configuration
+```bash
+./webserv;
+```
+
+### Run with a custom configuration
+```bash
+./webserv <path to config file>;
 ```
